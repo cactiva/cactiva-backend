@@ -1,0 +1,21 @@
+{
+  "main": "build/start.js",
+  "license": "ISC",
+  "scripts": {
+    "test": "none",
+    "start": "nodemon --config nodemon.json",
+    "build": "rm -rf ./build && tsc",
+    "run": "node build/start.js"
+  },
+  "dependencies": {
+    "@overnightjs/core": "^1.6.9",
+    "@overnightjs/jwt": "^1.1.14",
+    "express": "^4.17.1",
+    "http-status-codes": "^1.4.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.2",
+    "@types/express-jwt": "^0.0.42",
+    "@types/jsonwebtoken": "^8.3.5"
+  }
+}
