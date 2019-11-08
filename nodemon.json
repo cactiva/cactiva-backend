@@ -2,8 +2,8 @@
     "verbose": false,
     "ext": "ts js json yaml",
     "watch": [
-        "server/**/*.ts",
-        "server/**/*.yaml"
+        "src/**/*.ts",
+        "src/**/*.yaml"
     ],
     "ignore": [],
     "exec": "node --inspect --require ./tshook.js ./src/start.ts"
