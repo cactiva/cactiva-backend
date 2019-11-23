@@ -4,7 +4,7 @@ FROM node:current-alpine
 WORKDIR /usr/src/app
 
 # Install all Packages
-RUN npm i -g yarn 
+RUN apk add yarn 
 ADD . /usr/src/app
 
 RUN yarn
