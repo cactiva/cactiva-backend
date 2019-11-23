@@ -5,12 +5,63 @@
  */
 
 import * as bodyParser from "body-parser";
+import * as cookieParser from "cookie-parser";
+import * as cors from "cors";
 import * as controllers from "./controllers";
+import * as proxy from "http-proxy-middleware";
 import { Server } from "@overnightjs/core";
+import config from "./config";
+import { jwtMgr } from "./controllers";
 
+const auth = require("basic-auth");
+const adminAuthIP = [] as any;
 class MainServer extends Server {
   constructor() {
     super(true);
+    this.app.use(cors());
+    this.app.use(cookieParser());
+    this.app.use(
+      "/hasura",
+      proxy({
+        target: "http://localhost:" + config.hasura.port,
+        changeOrigin: true,
+        pathRewrite: (path, req) => {
+          return path.substr("/hasura".length);
+        },
+        onProxyReq: (proxyReq: any, req: any, res: any) => {
+          proxyReq.setHeader("x-hasura-admin-secret", config.hasura.secret);
+          const secret = req.headers["x-hasura-admin-secret"];
+          if (secret) {
+            proxyReq.setHeader("x-hasura-admin-secret", secret);
+          } else {
+            jwtMgr.middleware(req, res, () => {
+              if (!req.payload) {
+                const ip =
+                  req.headers["x-forwarded-for"] ||
+                  req.connection.remoteAddress;
+                if (adminAuthIP.indexOf(ip) < 0) {
+                  let user = auth(req);
+                  if (
+                    user === undefined ||
+                    user["name"] !== "admin" ||
+                    user["pass"] !== config.hasura.secret
+                  ) {
+                    res.statusCode = 401;
+                    res.setHeader(
+                      "WWW-Authenticate",
+                      `Basic realm="${config.name}"`
+                    );
+                    res.end("Unauthorized");
+                    return;
+                  }
+                  adminAuthIP.push(ip);
+                }
+              }
+            });
+          }
+        }
+      })
+    );
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: true }));
     this.setupControllers();

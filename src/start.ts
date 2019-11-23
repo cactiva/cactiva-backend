@@ -1,6 +1,8 @@
-import * as path from "path";
-import * as fs from "fs";
+import config from "./config";
 import Server from "./server";
+import hasura from './hasura';
 
+hasura();
 const server = new Server();
-server.start(3000);
+server.start(config.backend.port);
+   
