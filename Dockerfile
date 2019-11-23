@@ -4,7 +4,7 @@ FROM node:current-alpine
 WORKDIR /usr/src/app
 
 # Install all Packages
-RUN apk add yarn 
+RUN apk add yarn libpq python
 ADD . /usr/src/app
 
 RUN yarn
