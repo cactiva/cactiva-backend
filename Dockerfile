@@ -6,7 +6,7 @@ WORKDIR /usr/src/app
 # Install all Packages
 RUN apk add yarn libpq python gcc musl-dev postgresql-dev g++ make
 ADD . /usr/src/app
-
+RUN chmod +x /usr/src/app/hasura
 RUN yarn
 
 CMD [ "yarn", "dev" ]
