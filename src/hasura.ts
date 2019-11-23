@@ -1,4 +1,5 @@
 import * as execa from "execa";
+import * as jetpack from "fs-jetpack";
 const config = require("./config").default;
 
 export default () => {
@@ -28,7 +29,7 @@ export default () => {
     ],
     {
       all: true,
-      cwd: "../"
+      cwd: jetpack.exists("hasura") ? "./" : "../"
     } as any
   );
   if (cli && cli.all) cli.all.pipe(process.stdout);
