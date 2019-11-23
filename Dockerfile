@@ -4,7 +4,7 @@ FROM node:current-alpine
 WORKDIR /usr/src/app
 
 # Install all Packages
-RUN apk add yarn libpq python
+RUN apk add yarn libpq python gcc musl-dev postgresql-dev
 ADD . /usr/src/app
 
 RUN yarn
