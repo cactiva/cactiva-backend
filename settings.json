@@ -1,6 +1,10 @@
 {
   "name": "knm",
-  "backend": { "protocol": "https", "port": "10000", "host": "knm.rx.plansys.co" },
+  "backend": {
+    "protocol": "https",
+    "port": "443",
+    "host": "knm.rx.plansys.co"
+  },
   "hasura": { "secret": "hasura123", "port": "11000" },
   "db": {
     "port": "5432",
