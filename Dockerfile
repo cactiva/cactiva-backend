@@ -1,4 +1,4 @@
-FROM node:current-alpine
+FROM node:stretch
    
 # Create Directory for the Container
 WORKDIR /usr/src/app
