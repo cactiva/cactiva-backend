@@ -3,8 +3,12 @@ FROM node:stretch
 # Create Directory for the Container
 WORKDIR /usr/src/app
 
+ENV TZ=Asia/Jakarta
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 # Install all Packages
-RUN apk add yarn libpq python gcc musl-dev postgresql-dev g++ make wget
+RUN apt update
+RUN apt install yarn libpq python gcc musl-dev postgresql-dev g++ make wget
 ADD . /usr/src/app
 
 RUN wget https://graphql-engine-cdn.hasura.io/server/latest/linux-amd64
