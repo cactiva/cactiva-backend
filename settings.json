@@ -1,16 +1,1 @@
-{
-  "name": "knm",
-  "backend": {
-    "protocol": "https",
-    "port": "443",
-    "host": "knm.rx.plansys.co"
-  },
-  "hasura": { "secret": "hasura123", "port": "11000" },
-  "db": {
-    "port": "5432",
-    "host": "db.plansys.co",
-    "user": "postgres",
-    "password": "andromedia123oke",
-    "database": "sfaknm"
-  }
-}
+{"name":"knm","backend":{"protocol":"https","port":"443","host":"knm.rx.plansys.co"},"hasura":{"secret":"hasura123","port":"11000"},"db":{"port":"5432","host":"db.plansys.co","user":"postgres","password":"andromedia123oke","database":"sfa_knm"}}
