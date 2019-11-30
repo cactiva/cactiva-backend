@@ -9,12 +9,7 @@
       "emitDecoratorMetadata": true,
       "moduleResolution": "node",
       "importHelpers": true,
-      "types": ["node"],
-      "typeRoots": ["node_modules/@types"], 
-      "baseUrl": "./",
-      "paths": {
-        "*" : ["src/@types/*"]
-      }
+      "typeRoots": ["node_modules/@types", "./src/types"], 
     },
     "include": ["./src/**/*.ts"],
     "exclude": ["./res"]

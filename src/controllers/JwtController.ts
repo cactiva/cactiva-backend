@@ -3,7 +3,6 @@
  *
  * created by Sean Maxwell Aug 26, 2018
  */
-
 import { Controller, Get, Middleware, Post, Put } from "@overnightjs/core";
 import { ISecureRequest, JwtManager } from "@overnightjs/jwt";
 import { Request, Response } from "express";
