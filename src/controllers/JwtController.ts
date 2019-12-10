@@ -7,7 +7,7 @@ import { Controller, Get, Middleware, Post, Put } from "@overnightjs/core";
 import { ISecureRequest, JwtManager } from "@overnightjs/jwt";
 import { Request, Response } from "express";
 import { FORBIDDEN, OK } from "http-status-codes";
-import Password from "node-php-password";
+import * as Password from "node-php-password";
 const db = require("../db").default;
 
 export const jwtMgr = new JwtManager("12345678901234567890123456789012", "24h");
