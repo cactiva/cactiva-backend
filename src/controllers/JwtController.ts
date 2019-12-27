@@ -32,12 +32,12 @@ export class JwtController {
           ...u,
           time: new Date().toString(),
           "https://hasura.io/jwt/claims": {
-            "x-hasura-allowed-roles": [u.pihak],
-            "x-hasura-default-role": u.pihak,
+            "x-hasura-allowed-roles": [u.role],
+            "x-hasura-default-role": u.role,
             "x-hasura-user-id": u.id.toString()
           }
         });
-        return res.status(OK).send({jwt: jwtStr, user: u});
+        return res.status(OK).send({ jwt: jwtStr, user: u });
       }
     }
 
@@ -46,29 +46,10 @@ export class JwtController {
     });
   }
 
-  @Post("callProtectedRoute")
+  @Post("verify")
   @Middleware(jwtMgr.middleware)
-  private callProtectedRoute(req: ISecureRequest, res: Response) {
-    return res.status(OK).json({
-      email: req.payload.email
-    });
-  }
-
-  @Put("getJwtAlt/:fullname")
-  private getJwtFromHandler(req: Request, res: Response) {
-    const jwtStr = jwtMgr.jwt({
-      fullName: req.params.fullname
-    });
-    return res.status(OK).json({
-      jwt: jwtStr
-    });
-  }
-
-  @Post("callProtectedRouteAlt")
-  @Middleware(jwtMgr.middleware)
-  private callProtectedRouteFromHandler(req: ISecureRequest, res: Response) {
-    return res.status(OK).json({
-      fullname: req.payload.fullName
-    });
+  private verify(req: ISecureRequest, res: Response) {
+    console.log(req.payload)
+    return res.status(OK).json(req.payload);
   }
 }
