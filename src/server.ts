@@ -30,14 +30,14 @@ class MainServer extends Server {
         },
         onProxyReq: (proxyReq: any, req: any, res: any) => {
           proxyReq.setHeader("x-hasura-admin-secret", config.hasura.secret);
-          // const secret = req.headers["x-hasura-admin-secret"];
+          const secret = req.headers["x-hasura-admin-secret"];
           // if (secret) {
-          //   proxyReq.setHeader("x-hasura-admin-secret", secret); 
+          //   proxyReq.setHeader("x-hasura-admin-secret", secret);
           // } else {
           //   jwtMgr.middleware(req, res, () => {
           //     if (!req.payload) {
           //       const ip =
-          //         req.headers["x-forwarded-for"] || 
+          //         req.headers["x-forwarded-for"] ||
           //         req.connection.remoteAddress;
           //       if (adminAuthIP.indexOf(ip) < 0) {
           //         let user = auth(req);
