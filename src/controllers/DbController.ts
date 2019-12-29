@@ -18,8 +18,24 @@ export class DbController {
             res.send('Please provide a table in query');
         }
     }
+
+    @Get("columns")
+    private async columns(req: Request, res: Response) {
+        const table = req.query.table;
+        if (table) {
+            const r = await db.any(`${columnsQuery.replace('__table__', table)}`);
+            res.send(r);
+        } else {
+            res.send('Please provide a table in query');
+        }
+    }
 }
 
+const columnsQuery = `
+SELECT *
+  FROM information_schema.columns
+ WHERE table_name   = '__table__'
+     ;`
 
 const structureQuery = `
 SELECT

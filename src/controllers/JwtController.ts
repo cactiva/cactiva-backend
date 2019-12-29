@@ -49,7 +49,6 @@ export class JwtController {
   @Post("verify")
   @Middleware(jwtMgr.middleware)
   private verify(req: ISecureRequest, res: Response) {
-    console.log(req.payload)
     return res.status(OK).json(req.payload);
   }
 }
