@@ -23,7 +23,7 @@ class MainServer extends Server {
     this.app.use(
       "/hasura",
       proxy({
-        target: "http://[::1]:" + config.hasura.port,
+        target: "http://127.0.0.1:" + config.hasura.port,
         changeOrigin: true,
         pathRewrite: (path, req) => {
           return path.substr("/hasura".length);
