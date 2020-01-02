@@ -11,6 +11,7 @@ import * as controllers from "../controllers";
 import * as proxy from "http-proxy-middleware";
 import { Server } from "@overnightjs/core";
 import config from "./config";
+import { jwtMgr } from './controllers';
 
 const auth = require("basic-auth");
 const adminAuthIP = [] as any;
@@ -28,7 +29,9 @@ class MainServer extends Server {
           return path.substr("/hasura".length);
         },
         onProxyReq: (proxyReq: any, req: any, res: any) => {
-          proxyReq.setHeader("x-hasura-admin-secret", config.hasura.secret);
+          if (config.backend.mode === "dev") {
+            proxyReq.setHeader("x-hasura-admin-secret", config.hasura.secret);
+          }
           //   const secret = req.headers["x-hasura-admin-secret"];
           //   if (secret) {
           //     proxyReq.setHeader("x-hasura-admin-secret", secret);
@@ -58,8 +61,8 @@ class MainServer extends Server {
           //       }
           //     });
           //   }
-          }
-        })
+        }
+      })
     );
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: true }));

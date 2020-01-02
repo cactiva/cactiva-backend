@@ -30,5 +30,5 @@ export default () => {
     all: true,
     cwd: jetpack.exists("./hasura") ? "./" : "../"
   } as any);
-  if (cli && cli.all) cli.all.pipe(process.stdout);
+  // if (cli && cli.all) cli.all.pipe(process.stdout);
 };
