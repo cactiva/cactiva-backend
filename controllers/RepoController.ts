@@ -30,7 +30,7 @@ export class RepoController {
             );
           } else if (!role || repoFolder[path].role.indexOf(role) === -1) {
             cb(`User role not allowed to upload file!`, false);
-          } else if (repoFolder[path].fileType.indexOf(extFile[1]) === -1) {
+          } else if (repoFolder[path].fileType.indexOf(extFile[extFile.length-1]) === -1) {
             cb(`Upload '${originalname}' not allowed file type!`, false);
           } else {
             cb(null, true);
